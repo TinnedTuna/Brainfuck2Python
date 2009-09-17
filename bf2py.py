@@ -1,6 +1,6 @@
 
 class BF2Py():
-    def __init__(self):
+    def __init__(self, debug=None):
         """
             Set up the BF2Py env.
         """
@@ -12,7 +12,10 @@ class BF2Py():
                     ".":("print chr(tape[point]),\n", (lambda : self.__nop()),), \
                     ",":("tape[point] = ord(raw_input())\n", (lambda : self.__nop()),), 
                     "[":("while (tape[point] != 0):\n", (lambda : self.__incr(self,"int_level")),), \
-                    "]":("\n",(lambda : self.__decr(self,"int_level")),)}
+                    "]":("\n",(lambda : self.__decr(self,"int_level")),) \
+                    }
+        if debug:
+            self.commands["#"]=("print str(tape[:10])+\" Pointer val: \"+str(point)\n", (lambda :self.__nop()),)
         self.int_level=0 # Current indentation level of the output python code
         self.indent = "    " # Indentation
         
