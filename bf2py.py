@@ -10,7 +10,7 @@ class BF2Py():
                     "+":("tape[point]+=1\n",(lambda : self.__nop()),),  \
                     "-":("tape[point]-=1\n", (lambda : self.__nop()),), \
                     ".":("print chr(tape[point]),\n", (lambda : self.__nop()),), \
-                    ",":("tape[point] = raw_input()\n", (lambda : self.__nop()),), 
+                    ",":("tape[point] = ord(raw_input())\n", (lambda : self.__nop()),), 
                     "[":("while (tape[point] != 0):\n", (lambda : self.__incr(self,"int_level")),), \
                     "]":("\n",(lambda : self.__decr(self,"int_level")),)}
         self.int_level=0 # Current indentation level of the output python code
