@@ -3,7 +3,9 @@ Brainfuck to Python Compiler
 
 A brainfuck to python compiler.
 
-Usage: python compiler.py input_bf.b out_python.py
+Usage: python compiler.py input_bf.b out_python.py [-d]
+
+-d is the dubug flag. Interprets '#' in bf code as "print debug info"
 
 This compiles brainfuck from input_bf.b into python code in out_python.py. 
 Then simply run "python out_python.py"
