@@ -1,4 +1,3 @@
-
 class BF2Py():
     def __init__(self, debug=None):
         """
@@ -18,6 +17,7 @@ class BF2Py():
             self.commands["#"]=("print str(tape[:10])+\" Pointer val: \"+str(point)\n", (lambda :self.__nop()),)
         self.int_level=0 # Current indentation level of the output python code
         self.indent = "    " # Indentation
+        self.cache = []
         
     def __nop(self):
         """
@@ -38,11 +38,20 @@ class BF2Py():
         setattr(obj, attr, (getattr(obj, attr)-1))
         
     def process_char(self, input_chr):
+        """
+            Process a single character and emit the correct Python equivalent
+        """
         if input_chr in self.commands:
+            # Handle the indent level
             for i in range(self.int_level):
                 self.code+=self.indent
+            # Add the correct code
             self.code+= self.commands[input_chr][0]
+            # Perform the associated housekeeping.
             self.commands[input_chr][1]()
             
     def get_code(self):
+        """
+            Get the code back
+        """
         return self.code
